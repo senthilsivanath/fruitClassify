@@ -35,8 +35,14 @@ class Trainer():
         for classifier in self.classifiers:
             print classifier.test(testPaths,self.classes,verbose=False)
 
+    def classifyName(self,classifier,imgs):
+        for img in imgs:
+            className = classifier.classify(img)
+            return className
+
     def visualizeResults(self,classifier,imgs):
         for img in imgs:
+            print img
             className = classifier.classify(img)
             img.drawText(className,10,10,fontsize=60,color=Color.BLUE)         
             imgs.save()

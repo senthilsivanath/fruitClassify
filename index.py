@@ -14,6 +14,7 @@ def main():
     
     imgs = ImageSet()
     for p in testPaths:
+        print "path"+p
         imgs += ImageSet(p)
     random.shuffle(imgs)
 
