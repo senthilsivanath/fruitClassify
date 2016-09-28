@@ -1,4 +1,6 @@
 from Trainer import Trainer
+from SimpleCV.ImageClass import Image, ImageSet, ColorSpace
+import random
 
 classes = ['orange','potato','tomato']
 

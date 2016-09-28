@@ -1,5 +1,6 @@
 from SimpleCV.Features import HueHistogramFeatureExtractor, EdgeHistogramFeatureExtractor, HaarLikeFeatureExtractor
 from SimpleCV.MachineLearning import SVMClassifier, TreeClassifier, NaiveBayesClassifier, KNNClassifier
+from SimpleCV import Color
 
 class Trainer():
 
@@ -16,7 +17,7 @@ class Trainer():
 
     def getClassifiers(self,extractors):
        
-        svm = SVMClassifier([HueHistogramFeatureExtractor()])
+        svm = SVMClassifier(extractors)
         tree = TreeClassifier(extractors)
         bayes = NaiveBayesClassifier(extractors)
         knn = KNNClassifier(extractors)
@@ -26,16 +27,16 @@ class Trainer():
         self.classifiers = self.getClassifiers(self.getExtractors())
         print "after getting classifiers"+str(len(self.classifiers))
         for classifier in self.classifiers:
-            print self.classes
-            classifier.train(self.trainPaths,self.classes,verbose=True)
+            #print self.classes
+            classifier.train(self.trainPaths,self.classes,verbose=False)
 
     def test(self,testPaths):
        
         for classifier in self.classifiers:
-            print classifier.test(testPaths,self.classes,verbose=True)
+            print classifier.test(testPaths,self.classes,verbose=False)
 
     def visualizeResults(self,classifier,imgs):
         for img in imgs:
             className = classifier.classify(img)
             img.drawText(className,10,10,fontsize=60,color=Color.BLUE)         
-        #imgs.save('test.jpg')
+            imgs.save()
